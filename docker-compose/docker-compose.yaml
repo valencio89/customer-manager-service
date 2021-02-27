@@ -1,0 +1,16 @@
+version: "3"
+services:
+  mongo:
+    image: mongo:3.2.4
+    container_name: "mongo"
+    ports:
+      - 27017:27017
+    command: --smallfiles
+  api:
+    image: hsbc/customer-manager-service:1.0.0
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+    ports:
+      - 8080:8080
+    links:
+      - mongo
